@@ -93,17 +93,18 @@ var utils = {
 //信息提示
 var Alert = {
 
-    success: function (message) {
-        notie.alert(1, message, 2);
+    success: function (message,stayTime) {
+        notie.alert(1, message, stayTime||2);
     },
-    warning: function (message) {
-        notie.alert(2, message, 2);
+    warning: function (message,stayTime) {
+        notie.alert(2, message, stayTime||2);
     },
-    info: function (message) {
-        notie.alert(4, message, 2);
+    info: function (message,stayTime) {
+
+        notie.alert(4, message, stayTime||2);
     },
-    error: function (message) {
-        notie.alert(3, message, 2.5);
+    error: function (message,stayTime) {
+        notie.alert(3, message, stayTime||2.5);
     },
     confirm: function (message, yes_callback) {
         notie.confirm(message, "确定", "取消", yes_callback);

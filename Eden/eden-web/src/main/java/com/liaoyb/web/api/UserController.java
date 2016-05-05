@@ -304,6 +304,7 @@ public class UserController {
      */
     @RequestMapping("/findUser")
     public void findUser(HttpServletRequest request,HttpServletResponse response,Page<User>page,String searchText){
+        WebUtils.setPage(page,request);
         page=userService.findUser(page,searchText);
         MyResultUtil.sendPage(response,page);
     }

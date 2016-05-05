@@ -8,11 +8,13 @@ import com.liaoyb.persistence.domain.vo.custom.ObjTest;
 import com.liaoyb.persistence.domain.vo.custom.SongCustom;
 import com.liaoyb.persistence.service.ArtistService;
 import com.liaoyb.support.utils.MyResultUtil;
+import com.liaoyb.support.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
@@ -92,7 +94,8 @@ public class ArtistController {
      * @param searchText
      */
     @RequestMapping("/findArtist")
-    public void findArtist(HttpServletResponse response, Page<ArtistDto>page, String searchText){
+    public void findArtist(HttpServletRequest request, HttpServletResponse response, Page<ArtistDto>page, String searchText){
+        WebUtils.setPage(page,request);
         page=artistService.findArtist(page,searchText);
         MyResultUtil.sendPage(response,page);
     }

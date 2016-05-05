@@ -146,6 +146,7 @@ public class SonglistContoller {
      */
     @RequestMapping("/findSonglist")
     public void findSonglist(HttpServletRequest request, HttpServletResponse response, Page<SonglistCountDto>page,String searchText){
+        WebUtils.setPage(page,request);
         page=songlistService.findSonglist(page,searchText);
         MyResultUtil.sendPage(response,page);
     }

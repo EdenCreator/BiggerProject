@@ -129,7 +129,8 @@
 
     <build>
         <filters>
-            <filter>../../profiles/${env}/mysql.properties</filter>
+            <filter>../profiles/${env}/mysql.properties</filter>
+            <filter>../profiles/${env}/path.properties</filter>
         </filters>
 
         <resources>
@@ -161,34 +162,22 @@
 
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appassembler-maven-plugin</artifactId>
-                <version>1.2.1</version>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
                 <configuration>
-                    <repositoryLayout>flat</repositoryLayout>
-                    <repositoryName>lib</repositoryName>
-                    <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
-                    <configurationDirectory>conf</configurationDirectory>
-                    <copyConfigurationDirectory>true</copyConfigurationDirectory>
-                    <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
-                    <assembleDirectory>${project.build.directory}/server</assembleDirectory>
-                    <extraJvmArguments>-Xms768m -Xmx768m -XX:PermSize=128m
-                        -XX:MaxPermSize=256m -XX:NewSize=192m -XX:MaxNewSize=384m
-                    </extraJvmArguments>
-                    <binFileExtensions>
-                        <unix>.sh</unix>
-                    </binFileExtensions>
-                    <platforms>
-                        <platform>windows</platform>
-                        <platform>unix</platform>
-                    </platforms>
-                    <programs>
-                        <program>
-                            <mainClass>com.liaoyb.Application</mainClass>
-                            <name>startup</name>
-                        </program>
-                    </programs>
+                    <descriptors>
+                        <descriptor>src/main/assemble/package.xml</descriptor>
+                    </descriptors>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 

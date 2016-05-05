@@ -61,6 +61,7 @@ public class AlbumController {
      */
     @RequestMapping("/findAlbum")
     public void findAlbum(HttpServletRequest request, HttpServletResponse response, Page<Album> page,String searchText){
+        WebUtils.setPage(page,request);
         page=albumService.findAlbum(page,searchText);
         MyResultUtil.sendPage(response,page);
     }

@@ -368,11 +368,17 @@
 
                                 var formData = new FormData();
                                 formData.append('file', blob);
+                                Alert.info("正在上传头像，请勿马上提交",2);
+                                //提交按钮禁用
+                                $("#edit_user_info_submit_btn").attr('disabled', 'disabled');
                                 //上传
                                 server.myfile.upload(formData,function(data){
                                     //文件上传成功
                                     console.info(data);
                                     $("#coverKey").val(data.data.key);
+                                    Alert.success("头像预上传成功");
+
+                                    $("#edit_user_info_submit_btn").removeAttr('disabled');
                                 },function(data){
                                     Alert.warning("截图上传失败")
                                 });
@@ -382,6 +388,10 @@
 
                             //提交按钮
                             $("#edit_user_info_submit_btn").click(function(){
+                                var that=$(this);
+                                if(typeof(that.attr("disabled"))!="undefined"){
+                                    return;
+                                }
                                 //表单数据
 
                                 var data=$("#edit_user_form").serializeObject();

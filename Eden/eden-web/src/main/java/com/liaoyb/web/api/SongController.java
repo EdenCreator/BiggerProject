@@ -194,6 +194,7 @@ public class SongController {
      */
     @RequestMapping("/findSong")
     public void findSong(HttpServletRequest request,HttpServletResponse response,Page<SongCustom>page,Integer type,String searchText){
+        WebUtils.setPage(page,request);
         page=songService.findSong(page,type,searchText);
         MyResultUtil.sendPage(response,page);
     }
